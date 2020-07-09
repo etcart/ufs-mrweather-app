@@ -208,6 +208,7 @@ then rerun checkout_externals.
         is_dirty = False
         try:
             xml_status = ET.fromstring(svn_output)
+        # pylint: disable=broad-except
         except BaseException:
             fatal_error(
                 "SVN returned invalid XML message {}".format(svn_output))

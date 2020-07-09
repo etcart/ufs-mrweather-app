@@ -13,7 +13,7 @@ from .utils import printlog, indent_string
 from .global_constants import VERBOSITY_VERBOSE, VERBOSITY_DUMP
 
 
-class ExternalStatus(object):
+class ExternalStatus():
     """Class to represent the status of a given source repository or tree.
 
     Individual repositories determine their own status in the

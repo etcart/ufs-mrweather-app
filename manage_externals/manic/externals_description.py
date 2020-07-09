@@ -17,6 +17,7 @@ from __future__ import absolute_import
 from __future__ import unicode_literals
 from __future__ import print_function
 
+
 import logging
 import os
 import os.path
@@ -103,7 +104,7 @@ def read_externals_description_file(root_dir, file_name):
 
     return externals_description
 
-class LstripReader(object):
+class LstripReader():
     "LstripReader formats .gitmodules files to be acceptable for configparser"
     def __init__(self, filename):
         with open(filename, 'r') as infile:
@@ -114,6 +115,13 @@ class LstripReader(object):
         for line in lines:
             self._lines.append(line.lstrip())
 
+    def iternext(self):
+        """Return the next line or raise StopIteration"""
+        if self._index >= self._num_lines:
+            raise StopIteration
+
+        self._index = self._index + 1
+        return self._lines[self._index - 1]
     def readlines(self):
         """Return all the lines from this object's file"""
         return self._lines
@@ -121,7 +129,7 @@ class LstripReader(object):
     def readline(self, size=-1):
         """Format and return the next line or raise StopIteration"""
         try:
-            line = self.next()
+            line = self.iternext()
         except StopIteration:
             line = ''
 
@@ -135,16 +143,8 @@ class LstripReader(object):
         self._index = 0
         return self
 
-    def next(self):
-        """Return the next line or raise StopIteration"""
-        if self._index >= self._num_lines:
-            raise StopIteration
-
-        self._index = self._index + 1
-        return self._lines[self._index - 1]
-
     def __next__(self):
-        return self.next()
+        return self.iternext()
 
 def git_submodule_status(repo_dir):
     """Run the git submodule status command to obtain submodule hashes.

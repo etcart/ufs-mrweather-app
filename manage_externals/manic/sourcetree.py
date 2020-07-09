@@ -17,7 +17,7 @@ from .utils import fatal_error, printlog
 from .global_constants import EMPTY_STR, LOCAL_PATH_INDICATOR
 from .global_constants import VERBOSITY_VERBOSE
 
-class _External(object):
+class _External():
     """
     _External represents an external object inside a SourceTree
     """
@@ -264,7 +264,7 @@ class _External(object):
         self._externals_sourcetree = SourceTree(externals_root, externals)
         os.chdir(cwd)
 
-class SourceTree(object):
+class SourceTree():
     """
     SourceTree represents a group of managed externals
     """

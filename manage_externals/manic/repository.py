@@ -6,7 +6,7 @@ from .utils import fatal_error
 from .global_constants import EMPTY_STR
 
 
-class Repository(object):
+class Repository():
     """
     Class to represent and operate on a repository description.
     """
