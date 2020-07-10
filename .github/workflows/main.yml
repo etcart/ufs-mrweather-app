@@ -6,6 +6,8 @@ jobs:
     name: test
     runs-on: ubuntu-latest
     steps:
+      - name: install linter
+        run: sudo apt install pylint
 
       - name: lint
         run: pylint "manage_externals/manic"
